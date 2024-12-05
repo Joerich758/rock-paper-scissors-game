@@ -1,38 +1,181 @@
-.App {
-  text-align: center;
+.main-page {
+  background-image: linear-gradient(rgb(185, 255, 185), white);
+  height: 100vh;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.title-container {
+  place-items: center;
+  padding-top: 25px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.title {
+  padding-top: 25px;
+  font-weight: bold;
+  font-size: 20px;
+  background-color: white;
+  width: 200px;
+  padding: 10px;
+  border-radius: 20px;
+  border: 5px solid rgb(20, 147, 1);
+  color: rgb(255, 154, 3);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.scores {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding-top: 25px;
+}
+
+.player-score {
+  display: flex;
+  margin-right: 150px;
+  height: 50px;
+  width: 200px;
+  background-color: white;
+  border-radius: 20px;
+  border: 5px solid rgb(20, 147, 1);
+  color: rgb(255, 154, 3);
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  font-size: 20px;
+  font-weight: bold;
 }
 
-.App-link {
-  color: #61dafb;
+.robot-score {
+  display: flex;
+  height: 50px;
+  width: 200px;
+  background-color: white;
+  border-radius: 20px;
+  border: 5px solid rgb(20, 147, 1);
+  color: rgb(255, 154, 3);
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: bold;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.large-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding-top: 25px;
+}
+
+.container1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  height: 250px;
+  background-color: white;
+  border-radius: 20px;
+  border: 5px solid rgb(20, 147, 1);
+  color: rgb(255, 154, 3);
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.playerShake {
+  animation: playerShakeAnimation 0.8s ease-in-out infinite;
+}
+
+@keyframes playerShakeAnimation {
+  0%,
+  100% {
+    transform: rotate(100deg);
   }
-  to {
-    transform: rotate(360deg);
+  50% {
+    transform: rotate(80deg);
   }
+}
+
+.invisible-container {
+  display: flex;
+  width: 150px;
+}
+
+.container2 {
+  display: flex;
+  width: 150px;
+  align-items: center;
+  font-size: 50px;
+  color: rgb(255, 154, 3);
+  justify-content: center;
+}
+
+.results {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  font-weight: bold;
+  color: rgb(255, 154, 3);
+}
+
+.container3 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  height: 250px;
+  background-color: white;
+  border-radius: 20px;
+  border: 5px solid rgb(20, 147, 1);
+  color: rgb(255, 154, 3);
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.robotShake {
+  animation: robotShakeAnimation 0.8s ease-in-out infinite;
+}
+
+@keyframes robotShakeAnimation {
+  0%,
+  100% {
+    transform: scaleY(-1) rotate(-80deg);
+  }
+  50% {
+    transform: scaleY(-1) rotate(-100deg);
+  }
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+}
+
+.button-container button {
+  display: flex;
+  background-color: white;
+  height: 100px;
+  width: 100px;
+  margin: 20px;
+  border: 5px solid rgb(20, 147, 1);
+  border-radius: 20px;
+  flex-direction: column;
+  justify-content: center;
+  place-items: center;
+  color: rgb(255, 154, 3);
+  font-size: 50px;
+}
+
+.start {
+  display: flex;
+  height: 60px;
+  width: 100px;
+  background-color: white;
+  justify-content: center;
+  margin: 0 auto;
+  align-items: center;
+  border: 5px solid rgb(20, 147, 1);
+  border-radius: 20px;
+  color: rgb(255, 154, 3);
+  font-weight: bold;
+  font-size: 20px;
 }
