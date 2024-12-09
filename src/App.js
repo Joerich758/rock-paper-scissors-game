@@ -1,6 +1,9 @@
 import './App.css';
 import { FaRegHandRock, FaRegHandPaper, FaRegHandScissors, FaHandRock, FaHandPaper, FaHandScissors,  } from "react-icons/fa";
 import { useState, useEffect } from 'react'
+import { Buttons } from './Buttons.js'
+import { Containers } from './Containers.js'
+import { Scores } from './Scores.js'
 
 function App() {
   
@@ -18,11 +21,11 @@ function App() {
   })
 
   useEffect(() => {
-    if(timer && runTimer > 0){
+    if(runTimer == true && timer > 0){
       setTimeout(() => {
         setTimer(timer - 1)
       }, 1000)
-    } else if(timer && runTimer < 1){
+    } else if(timer < 1){
       setRunTimer(false)
       play()
     }
@@ -41,7 +44,7 @@ function App() {
   }
 
   const generateRobotHand = (randomNumber) => {
-    randomNumber = Math.floor(Math.random() * 3)
+    randomNumber = Math.floor(Math.random() * objects.length)
     setRobotHand(randomNumber)
     console.log('Robot Hand:', randomNumber)
   }
@@ -88,11 +91,11 @@ function App() {
         return (
           <div className="container1"><div className="playerShake">{objects[0].icon}</div></div>
         )
-      } else if(timer < 1){
-        return (
-          <div className="container1">{playerObject()}</div> 
-        )
       }
+    } else if(timer < 1){
+      return (
+        <div className="container1">{playerObject()}</div> 
+      )
     } else {
       return (
         <div className="container1"></div>
@@ -106,11 +109,11 @@ function App() {
         return (
           <div className="container3"><div className="robotShake">{objects[0].icon}</div></div>
         )
-      } else if(timer < 1){
-        return (
-          <div className="container3">{robotObject()}</div> 
-        )
       }
+    } else if(timer < 1){
+      return (
+        <div className="container3">{robotObject()}</div> 
+      )
     } else {
       return (
         <div className="container3"></div>
@@ -169,33 +172,26 @@ function App() {
   }
 
   const play = () => {
-    // console.log('Player Hand:', playerHand, 'Robot Hand:', robotHand)
-    if(timer < 1 && playerHand == robotHand){
-      setResults({ message: 'We have a draw!', winner: 'No one!'})
-    } else if(timer < 1 && playerHand == 0 && robotHand == 1){
-      setResults({ message: 'Paper beats Rock!', winner: 'Robot'})
+    if(runTimer == false && playerHand == robotHand){
+      setResults({ message: 'We have a draw!', winner: 'No Winner!'})
+    } else if(runTimer == false && playerHand == 0 && robotHand == 1){
+      setResults({ message: 'Paper beats Rock!', winner: 'Robot Wins!'})
       setScore({ ...score, robot: score.robot + 1})
-      console.log(`Winner: Robot Message: Paper beats Rock!`)
-    } else if(timer < 1 && playerHand == 0 && robotHand == 2){
-      setResults({ message: 'Rock beats Scissors!', winner: 'Player'})
+    } else if(runTimer == false && playerHand == 0 && robotHand == 2){
+      setResults({ message: 'Rock beats Scissors!', winner: 'Player Wins!'})
       setScore({ ...score, player: score.player + 1})
-      console.log(`Winner: Robot Message: Rock beats Scissors!`)
-    } else if(timer < 1 && playerHand == 1 && robotHand == 0){
-      setResults({ message: 'Paper beats Rock!', winner: 'Player'})
+    } else if(runTimer == false && playerHand == 1 && robotHand == 0){
+      setResults({ message: 'Paper beats Rock!', winner: 'Player Wins!'})
       setScore({ ...score, player: score.player + 1})
-      console.log(`Winner: Player Message: Paper beats Rock!`)
-    } else if(timer < 1 && playerHand == 1 && robotHand == 2){
-      setResults({ message: 'Scissors beats Paper!', winner: 'Robot'})
+    } else if(runTimer == false && playerHand == 1 && robotHand == 2){
+      setResults({ message: 'Scissors beats Paper!', winner: 'Robot Wins!'})
       setScore({ ...score, robot: score.robot + 1})
-      console.log(`Winner: Robot Message: Scissors beats Paper!`)
-    } else if(timer < 1 && playerHand == 2 && robotHand == 0){
-      setResults({ message: 'Rock beats Scissors!', winner: 'Robot'})
+    } else if(runTimer == false && playerHand == 2 && robotHand == 0){
+      setResults({ message: 'Rock beats Scissors!', winner: 'Robot Wins!'})
       setScore({ ...score, robot: score.robot + 1})
-      console.log(`Winner: Robot Message: Rock beats Scissors!`)
-    } else if(timer < 1 && playerHand == 2 && robotHand == 1){
-      setResults({ message: 'Scissors beats Paper!', winner: 'Player'})
+    } else if(runTimer == false && playerHand == 2 && robotHand == 1){
+      setResults({ message: 'Scissors beats Paper!', winner: 'Player Wins!'})
       setScore({ ...score, player: score.player + 1})
-      console.log(`Winner: Player Message: Scissors beats Paper!`)
     }
   }
 
@@ -206,37 +202,9 @@ function App() {
       <div className="title-container">
       <div className="title">Rock Paper Scissors!</div>
       </div>
-      <div className="scores">
-        <div className="player-score">Player: {score.player}</div>
-        <div></div>
-        <div className="robot-score">Robot: {score.robot}</div>
-      </div>
-      <div className="large-container">
-        {playerShake()}
-          {
-          runTimer == true && timer > 0 ? 
-          <div className="container2">{timer}</div> 
-          : 
-          <>
-            {
-            results?.winner && runTimer && timer < 1 ? 
-            <div className="results">
-              <p>{results.message}</p>
-              <p>{results.winner}</p>
-              </div> 
-            :
-            <div className="invisible-container"></div>
-            }          
-          </>
-          }
-          {robotShake()}
-        </div>
-        <div className="button-container">
-        <button onClick={() => setPlayerHand(0)}>{selectOption(0)}</button>
-        <button onClick={() => setPlayerHand(1)}>{selectOption(1)}</button>
-        <button onClick={() => setPlayerHand(2)}>{selectOption(2)}</button>
-        </div>
-        <button onClick={start} className="start">Start</button>
+      <Scores score={score}/>
+      <Containers playerShake={playerShake} runTimer={runTimer} timer={timer} results={results} robotShake={robotShake}/>
+      <Buttons setPlayerHand={setPlayerHand} selectOption={selectOption} start={start}/>
     </div>
   );
 }
